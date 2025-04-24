@@ -1,13 +1,21 @@
+import './styles/global.css';
 import { routerInstance } from "./global";
+import { renderPageBaseline, renderHome, renderDashboard } from "./render";
 
 routerInstance.setRouteList([
     {
         path: '/',
-        enterFunction: renderHome
+        enterFunction: () => {
+            renderPageBaseline();
+            renderHome();
+        }
     },
     {
         path: '/dashboard',
-        enterFunction: renderDashboard
+        enterFunction: () => {
+            renderPageBaseline();
+            renderDashboard();
+        }
     },
 ]);
 routerInstance.setServerRouteList([
