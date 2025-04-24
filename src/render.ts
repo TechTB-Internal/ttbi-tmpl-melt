@@ -1,6 +1,6 @@
 import './comp/comp-header.js';
 import './comp/comp-main.js';
-import './comp/comp-home.js';
+import './comp/comp-login.js';
 import './comp/comp-dashboard.js';
 
 export function renderPageBaseline() {
@@ -17,8 +17,8 @@ export function renderPageBaseline() {
 
 export function renderHome() {
     const main:  Element | null = document.querySelector('comp-main');
-    const home: Element = document.createElement('comp-home');
-    main?.replaceChildren(home);
+    const login: Element = document.createElement('comp-login');
+    main?.replaceChildren(login);
 }
 
 export function renderDashboard() {
