@@ -1,6 +1,8 @@
 import { LitElement, css, html } from "lit";
+import '../comp/comp-header';
+import '../comp/comp-main';
 
-export class CompDashboard extends LitElement {
+export class PageDashboard extends LitElement {
     static styles = css`
         :host {
             font-size: 18px;
@@ -21,11 +23,15 @@ export class CompDashboard extends LitElement {
     `
     render() {
         return html`
-            <div class="box">
-                <h1>Dashboard</h1>
-                <h3>You are logged in</h3>
-            </div>
+            <comp-header></comp-header>
+            <comp-main>
+                <div class="box">
+                    <h1>Dashboard</h1>
+                    <h3>You are logged in</h3>
+                </div>
+            </comp-main>
+
         `;
     }
 }
-customElements.define('comp-dashboard', CompDashboard);
+customElements.define('page-dashboard', PageDashboard);

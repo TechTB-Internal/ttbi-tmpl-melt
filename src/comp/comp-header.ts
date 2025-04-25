@@ -3,8 +3,6 @@ import { LitElement, css, html } from "lit";
 export class CompHeader extends LitElement {
     static styles = css`
         :host {
-            position: fixed;
-            min-width: 100%;
             height: 64px;
             padding-left: 32px;
             padding-right: 32px;

@@ -1,5 +1,6 @@
-import { LitElement, css, html } from "lit";
-import { CompLoader } from "./comp-loader.js";
+import { LitElement, css, html } from 'lit';
+import { property } from 'lit/decorators.js';
+import './comp-loader.ts';
 
 export class CompLogin extends LitElement {
     static styles = css`
@@ -50,13 +51,21 @@ export class CompLogin extends LitElement {
             gap: 16px;
         }
         .button_container {
-            width: 100%;
+            min-height: 64px;
+            max-height: 64px;
+            min-width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items:center;
         }
     `
+
+    @property({ type: Boolean, reflect: true })
+    loading = false;
+    
+    @property({ attribute: false })
+    externalFunc?: (...args: unknown[]) => unknown;
 
     render() {
         return html`
@@ -65,21 +74,36 @@ export class CompLogin extends LitElement {
                     <input id="username" type="text" placeholder="username">
                     <input id="password" type="text" placeholder="password">
                 </div>
-                <div id="button_container">
-                    
+                <div class="button_container">
+                    ${this.loading ? this.renderLoader() : this.renderButton()}
                 </div>
             </div>
         `;
     }
 
-    private templateButton() {
+    private renderButton() {
         return html`
-            <button id="submit" @click="${this.handleClick}">Login</button>
+            <button id="submit" type="button" @click="${this.handleClick}">Login</button>
         `;
     }
 
-    private handleClick() {
+    private renderLoader() {
+        return html`
+            <comp-loader></comp-loader>
+        `;
+    }
 
+    private async handleClick() {
+        try {
+            this.loading = true;
+            if (typeof this.externalFunc === 'function') {
+                await this.externalFunc?.();
+              } else {
+                throw new Error('External function is not defined or not a function');
+              }
+        } catch (er) {
+            console.error(er);
+        }
     }
 }
 customElements.define('comp-login', CompLogin);
