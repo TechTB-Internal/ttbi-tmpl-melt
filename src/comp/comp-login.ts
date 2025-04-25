@@ -1,4 +1,5 @@
 import { LitElement, css, html } from "lit";
+import { CompLoader } from "./comp-loader.js";
 
 export class CompLogin extends LitElement {
     static styles = css`
@@ -48,7 +49,15 @@ export class CompLogin extends LitElement {
             align-items:center;
             gap: 16px;
         }
+        .button_container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items:center;
+        }
     `
+
     render() {
         return html`
             <div class="box">
@@ -56,9 +65,21 @@ export class CompLogin extends LitElement {
                     <input id="username" type="text" placeholder="username">
                     <input id="password" type="text" placeholder="password">
                 </div>
-                <button id="submit">Login</button>
+                <div id="button_container">
+                    
+                </div>
             </div>
         `;
+    }
+
+    private templateButton() {
+        return html`
+            <button id="submit" @click="${this.handleClick}">Login</button>
+        `;
+    }
+
+    private handleClick() {
+
     }
 }
 customElements.define('comp-login', CompLogin);

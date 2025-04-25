@@ -5,7 +5,7 @@ export class CompMain extends LitElement {
         :host {
             min-height: 100%;
             min-width: 100%;
-            padding-top: 256px;
+            padding-top: 192px;
             display: flex;
             justify-content: center;
         }
