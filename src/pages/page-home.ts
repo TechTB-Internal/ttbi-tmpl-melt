@@ -2,7 +2,7 @@ import { LitElement, html, css } from "lit";
 import '../comp/comp-header';
 import '../comp/comp-main';
 import '../comp/comp-login';
-import { authTest } from "../auth/auth";
+import { login } from "../util/utils";
 
 export class PageHome extends LitElement {
     static styles = css`
@@ -17,7 +17,7 @@ export class PageHome extends LitElement {
         return html`
             <comp-header></comp-header>
             <comp-main>
-                <comp-login .externalFunc="${authTest}"></comp-login>
+                <comp-login .loginFunc="${login}"></comp-login>
             </comp-main>
         `;
     }

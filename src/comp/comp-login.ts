@@ -65,7 +65,7 @@ export class CompLogin extends LitElement {
     loading = false;
     
     @property({ attribute: false })
-    externalFunc?: (...args: unknown[]) => unknown;
+    loginFunc?: (...args: unknown[]) => unknown;
 
     render() {
         return html`
@@ -96,8 +96,8 @@ export class CompLogin extends LitElement {
     private async handleClick() {
         try {
             this.loading = true;
-            if (typeof this.externalFunc === 'function') {
-                await this.externalFunc?.();
+            if (typeof this.loginFunc === 'function') {
+                await this.loginFunc?.();
               } else {
                 throw new Error('External function is not defined or not a function');
               }
