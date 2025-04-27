@@ -3,7 +3,7 @@ export const configSessionDev = {
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: false, // true if HTTPS
+        secure: false,
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000 // 1 day cookie
     }
