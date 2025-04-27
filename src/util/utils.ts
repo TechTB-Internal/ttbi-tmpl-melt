@@ -30,7 +30,6 @@ export async function login(username: string, password: string) {
             username: username,
             password: password
         };
-        console.log(payload);
         const res = await fetch('/auth/login', {
             method: 'POST',
             headers: {
@@ -43,8 +42,27 @@ export async function login(username: string, password: string) {
             routerInstance.navigateTo('/dashboard');
             return true;
         }
-        console.log(`login failed`);
+        console.warn(`login failed`);
         return false;
+    } catch (er: any) {
+        console.error(er);
+        return false;
+    }
+}
+
+export async function logout() {
+    try {
+        const res = await fetch('/auth/logout', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        const data = await res.json();
+        if (!data.success) {
+            throw new Error(`Logout failed.`)
+        }
+        routerInstance.navigateTo('/');
     } catch (er: any) {
         console.error(er);
         return false;

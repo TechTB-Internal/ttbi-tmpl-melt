@@ -65,14 +65,14 @@ export class CompLogin extends LitElement {
     loading = false;
 
     @property({ attribute: false })
-    loginFunc?: (username: string, password: string) => unknown;
+    func?: (username: string, password: string) => unknown;
 
     render() {
         return html`
             <div class="box">
                 <div class="input_container">
                     <input id="username" type="text" placeholder="username">
-                    <input id="password" type="text" placeholder="password">
+                    <input id="password" type="password" placeholder="password">
                 </div>
                 <div class="button_container">
                     ${this.loading ? this.renderLoader() : this.renderButton()}
@@ -100,10 +100,10 @@ export class CompLogin extends LitElement {
             const username = usernameInput?.value || '';
             const password = passwordInput?.value || '';
             this.loading = true;
-            if (typeof this.loginFunc !== 'function') {
-                throw new Error('External function is not defined or not a function');
+            if (typeof this.func !== 'function') {
+                throw new Error('Function is not defined or not a function');
             }
-            const result = await this.loginFunc?.(username, password);
+            const result = await this.func?.(username, password);
             if (!result) {
                 this.loading = false;
             }

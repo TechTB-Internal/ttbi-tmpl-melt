@@ -14,12 +14,25 @@ export class CompHeader extends LitElement {
             background-color: lightblue;
             color: black;
         }
-        a {
+        ::slotted(a) {
             font-size: 18px;
             text-decoration: none;
             color: black;
         }
-        a:hover {
+        ::slotted(a:hover) {
+            text-decoration: underline;
+        }
+        ::slotted(button) {
+            padding: unset;
+            margin: unset;
+            font-size: 18px;
+            text-decoration: none;
+            color: black;
+            border: none;
+            background-color: unset;
+            cursor: pointer;
+        }
+        ::slotted(button:hover) {
             text-decoration: underline;
         }
         .links {
@@ -32,8 +45,7 @@ export class CompHeader extends LitElement {
         return html`
                 <h2>TTBI-TMPL-MELT</h2>
                 <div class="links">
-                    <a href="/">Home</a>
-                    <a href="/dashboard">Dashboard</a>
+                    <slot></slot>
                 </div>
         `
     }

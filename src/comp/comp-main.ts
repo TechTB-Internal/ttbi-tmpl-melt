@@ -5,7 +5,10 @@ export class CompMain extends LitElement {
         :host {
             padding-top: 192px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            gap: 32px;
             flex: 1;
         }
     `

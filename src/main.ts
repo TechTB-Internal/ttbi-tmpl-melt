@@ -17,7 +17,7 @@ routerInstance.setRouteList([
     },
 ]);
 routerInstance.setServerRouteList([
-    '/login/:login-route'
+    '/auth/:login-route'
 ])
 
 routerInstance.startRouter();

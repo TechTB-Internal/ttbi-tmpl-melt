@@ -66,7 +66,7 @@ app.get('/auth/status', (req, res) => {
 });
 
 app.get('/404', (req, res) => {
-  res.status(404).send('Page Not Found');
+  return res.status(404).sendFile(path.join(siteRoot, '404.html'));
 });
 
 app.use((req, res) => {

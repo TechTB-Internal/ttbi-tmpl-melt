@@ -1,6 +1,8 @@
 import { LitElement, css, html } from "lit";
 import '../comp/comp-header';
 import '../comp/comp-main';
+import '../comp/comp-logout-button';
+import { logout } from "../util/utils";
 
 export class PageDashboard extends LitElement {
     static styles = css`
@@ -23,7 +25,10 @@ export class PageDashboard extends LitElement {
     `
     render() {
         return html`
-            <comp-header></comp-header>
+            <comp-header>
+                <a href="/">Home</a>
+                <comp-logout-button .func="${logout}">Logout</comp-logout-button>
+            </comp-header>
             <comp-main>
                 <div class="box">
                     <h1>Dashboard</h1>
