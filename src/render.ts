@@ -9,7 +9,7 @@ export async function renderHome() {
         routerInstance.navigateTo('/dashboard');
         return;
     }
-    const home: Element = new PageHome();
+    const home: any = new PageHome();
     document.body.replaceChildren(home);
 }
 

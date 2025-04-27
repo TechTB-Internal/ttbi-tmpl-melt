@@ -1,4 +1,6 @@
 import { LitElement, html, css } from "lit";
+import { property } from "lit/decorators.js";
+import { classMap } from 'lit/directives/class-map.js';
 import '../comp/comp-header';
 import '../comp/comp-main';
 import '../comp/comp-login';
@@ -13,7 +15,19 @@ export class PageHome extends LitElement {
             flex-direction: column;
             flex: 1;
         }
+        .hidden {
+            display: none;
+        }
+        p {
+            color: red;
+        }
     `
+
+    @property({ attribute: false, reflect: true })
+    errorText = '';
+
+    @property({ attribute: false })
+    hidden = true;
 
     render() {
         return html`
@@ -21,9 +35,19 @@ export class PageHome extends LitElement {
             </comp-header>
             <comp-main>
                 <comp-login .func="${login}"></comp-login>
-                <comp-error-box id="error_box"></comp-error-box>
+                <comp-error-box class="${classMap({ hidden: this.hidden })}"><p>${this.errorText}</p></comp-error-box>
             </comp-main>
         `;
+    }
+
+    error(text: string) {
+        try {
+            this.errorText = text;
+            this.hidden = false;
+            return;
+        } catch (er) {
+            console.log(er);
+        }
     }
 }
 customElements.define('page-home', PageHome);

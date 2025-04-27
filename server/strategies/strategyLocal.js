@@ -7,13 +7,14 @@ export default passport.use(
     new LocalStrategy((username, password, done) => {
         const userMatch = dataUsers.find(user => user.username === username);
         if (!userMatch) {
-            console.warn(`No matching user.`);
+            console.error(`No matching user.`);
             return done(null, false, { message: 'Invalid credentials' });
         }
         if (userMatch.password !== password) {
-            console.warn(`Incorrect password.`);
+            console.error(`Incorrect password.`);
             return done(null, false, { message: 'Invalid credentials' });
         }
+        console.log(`Login Successful`);
         return done(null, userMatch);
     })
 )

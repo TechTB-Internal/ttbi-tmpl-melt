@@ -15,7 +15,7 @@ const port = 3000;
 const dirProjectRoot = path.join(__dirname, '..');
 const siteRoot = path.join(dirProjectRoot, 'dist');
 
-passport.serializeUser((user, done) => { 
+passport.serializeUser((user, done) => {
   done(null, user.id)
 });
 passport.deserializeUser((id, done) => {
@@ -32,19 +32,27 @@ app.use(passport.session());
 
 app.post('/auth/login', (req, res, next) => {
   passport.authenticate('local', (er, user, info) => {
+    const inputUsername = req.body.username;
+    const inputPassword = req.body.password;
+    if (!inputUsername) {
+      console.error(`No user provided.`);
+      return res.status(401).json({ success: false, message: 'No username provided.' });
+    }
+    if (!inputPassword) {
+      console.error(`No password provided.`);
+      return res.status(401).json({ success: false, message: 'No password provided.' });
+    }
     if (er) {
       return next(er);
     }
     if (!user) {
-      console.warn(info.message );
-      return res.status(401).json({ success: false, message: 'Login failed' });
+      return res.status(401).json({ success: false, message: 'Login failed.' });
     }
     req.logIn(user, (er) => {
       if (er) {
         return next(er);
       }
-      console.log('Login successful');
-      return res.json({ success: true, message: 'Login successful' });
+      return res.json({ success: true, message: 'Login successful.' });
     });
   })(req, res, next);
 });
@@ -52,15 +60,15 @@ app.post('/auth/login', (req, res, next) => {
 app.get('/auth/logout', (req, res) => {
   req.logout(err => {
     if (err) {
-      return res.status(500).json({ success: false, message: 'Logout failed' });
+      return res.status(500).json({ success: false, message: 'Logout failed.' });
     }
-    res.json({ success: true, message: 'Logged out successfully' });
+    res.json({ success: true, message: 'Logged out successfully.' });
   });
 });
 
 app.get('/auth/status', (req, res) => {
   if (req.isAuthenticated && req.isAuthenticated()) {
-      return res.json({ authenticated: true, user: req.user });
+    return res.json({ authenticated: true, user: req.user });
   }
   res.json({ authenticated: false });
 });

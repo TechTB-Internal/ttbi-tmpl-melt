@@ -26,6 +26,7 @@ export async function authStatus() {
 
 export async function login(username: string, password: string) {
     try {
+        const page = document.querySelector('page-home');
         const payload: Object = {
             username: username,
             password: password
@@ -42,7 +43,7 @@ export async function login(username: string, password: string) {
             routerInstance.navigateTo('/dashboard');
             return true;
         }
-        console.warn(`login failed`);
+        page?.error(data.message || `Login failed.`);
         return false;
     } catch (er: any) {
         console.error(er);

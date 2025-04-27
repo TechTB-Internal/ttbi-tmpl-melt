@@ -5,9 +5,6 @@ export class CompErrorBox extends LitElement {
     :host {
         font-size: 18px;
     }
-    p {
-        color: red;
-    }
     .box {
         min-height: 128px;
         min-width: 384px;
@@ -25,7 +22,7 @@ export class CompErrorBox extends LitElement {
     render() {
         return html`
                 <div class="box">
-                    <p><slot></slot></p>
+                    <slot></slot>
                 </div>
         `
     }
