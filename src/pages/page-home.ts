@@ -21,7 +21,7 @@ export class PageHome extends LitElement {
             </comp-header>
             <comp-main>
                 <comp-login .func="${login}"></comp-login>
-                <comp-error-box></comp-error-box>
+                <comp-error-box id="error_box"></comp-error-box>
             </comp-main>
         `;
     }
