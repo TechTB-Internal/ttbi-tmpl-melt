@@ -6,17 +6,19 @@ import { authStatus } from './util/utils';
 export async function renderHome() {
     const res = await authStatus();
     if (res.authenticated) {
-        routerInstance.navigateTo('/dashboard')
+        routerInstance.navigateTo('/dashboard');
+        return;
     }
     const home: Element = new PageHome();
-    document.body.appendChild(home);
+    document.body.replaceChildren(home);
 }
 
 export async function renderDashboard() {
     const res = await authStatus();
     if (!res.authenticated) {
-        routerInstance.navigateTo('/')
+        routerInstance.navigateTo('/');
+        return;
     }
     const dashboard: Element = new PageDashboard();
-    document.body.appendChild(dashboard);
+    document.body.replaceChildren(dashboard);
 }

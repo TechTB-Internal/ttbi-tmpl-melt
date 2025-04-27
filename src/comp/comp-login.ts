@@ -63,9 +63,9 @@ export class CompLogin extends LitElement {
 
     @property({ type: Boolean, reflect: true })
     loading = false;
-    
+
     @property({ attribute: false })
-    loginFunc?: (...args: unknown[]) => unknown;
+    loginFunc?: (username: string, password: string) => unknown;
 
     render() {
         return html`
@@ -95,12 +95,18 @@ export class CompLogin extends LitElement {
 
     private async handleClick() {
         try {
+            const usernameInput = this.renderRoot.querySelector('#username') as HTMLInputElement | null;
+            const passwordInput = this.renderRoot.querySelector('#password') as HTMLInputElement | null;
+            const username = usernameInput?.value || '';
+            const password = passwordInput?.value || '';
             this.loading = true;
-            if (typeof this.loginFunc === 'function') {
-                await this.loginFunc?.();
-              } else {
+            if (typeof this.loginFunc !== 'function') {
                 throw new Error('External function is not defined or not a function');
-              }
+            }
+            const result = await this.loginFunc?.(username, password);
+            if (!result) {
+                this.loading = false;
+            }
         } catch (er) {
             console.error(er);
         }

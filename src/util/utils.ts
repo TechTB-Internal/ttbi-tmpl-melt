@@ -1,26 +1,10 @@
 import { routerInstance } from "../config";
 
-export async function login() {
-    try {
-        const auth = await authReq();
-        if (auth['success']) {
-            routerInstance.navigateTo('/dashboard');
-            return;
-        }
-        const elmLogin = document.getElementById('comp-login');
-        elmLogin?.setAttribute('loading', 'true');
-        console.log(`login failed`);
-        return;
-    } catch (er) {
-        console.error(er);
-    }
-}
-
 export async function authStatus() {
     try {
         const res = await fetch('/auth/status', {
             method: 'GET',
-            credentials: 'include' 
+            credentials: 'include'
         });
         const data = await res.json();
         if (data.authenticated) {
@@ -40,16 +24,13 @@ export async function authStatus() {
     }
 }
 
-export async function authReq() {
+export async function login(username: string, password: string) {
     try {
-        const usernameInput = document.getElementById('username') as HTMLInputElement | null;
-        const passwordInput = document.getElementById('password') as HTMLInputElement | null;
-        const username: string = usernameInput?.value ?? '';
-        const password: string = passwordInput?.value ?? '';
         const payload: Object = {
             username: username,
             password: password
         };
+        console.log(payload);
         const res = await fetch('/auth/login', {
             method: 'POST',
             headers: {
@@ -59,19 +40,13 @@ export async function authReq() {
         });
         const data = await res.json();
         if (data.success) {
-            return {
-                success: true
-            };
+            routerInstance.navigateTo('/dashboard');
+            return true;
         }
-        return {
-            success: false,
-            message: data.message
-        };
+        console.log(`login failed`);
+        return false;
     } catch (er: any) {
         console.error(er);
-        return {
-            success: false,
-            message: er.message
-        };;
+        return false;
     }
 }

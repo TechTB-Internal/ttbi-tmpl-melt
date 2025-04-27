@@ -5,8 +5,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { configSessionDev, configSessionProd } from './appConfig.js';
-import { localStrategy } from './auth/authLocal.js';
-import dataUsers from './data_test/dataUsers.js';
+import './strategies/strategyLocal.js';
+import { dataUsers } from './data_test/dataUsers.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,7 +15,6 @@ const port = 3000;
 const dirProjectRoot = path.join(__dirname, '..');
 const siteRoot = path.join(dirProjectRoot, 'dist');
 
-passport.use(localStrategy(dataUsers));
 passport.serializeUser((user, done) => { 
   done(null, user.id)
 });
@@ -78,4 +77,6 @@ app.use((req, res) => {
   res.status(200).sendFile(path.join(siteRoot, 'index.html'));
 });
 
-app.listen(port);
+app.listen(port, () => {
+  console.log(`\n\nServer is running.`)
+});

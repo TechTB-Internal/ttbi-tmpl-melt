@@ -1,1 +1,1 @@
-export default [{ id: 1, username: 'user', password: 'password' }];
+export const dataUsers = [{ id: 1, username: 'user', password: 'password' }];

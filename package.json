@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "tsc && vite build && node ./server/app.js"
   },
   "devDependencies": {
     "typescript": "~5.8.3",
