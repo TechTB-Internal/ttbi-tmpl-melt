@@ -1,4 +1,5 @@
-import { routerInstance } from "../config";
+import { routerInstance } from "../../site/router";
+import { AuthPayloadModel } from "./auth-payload-model";
 
 export async function authStatus() {
     try {
@@ -27,16 +28,15 @@ export async function authStatus() {
 export async function login(username: string, password: string) {
     try {
         const page = document.querySelector('page-home');
-        const payload: Object = {
-            username: username,
-            password: password
-        };
+        const authPayload = new AuthPayloadModel();
+        authPayload.username = username;
+        authPayload.password = password;
         const res = await fetch('/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(payload),
+            body: JSON.stringify(authPayload),
         });
         const data = await res.json();
         if (data.success) {

@@ -1,8 +1,8 @@
 import { LitElement, css, html } from "lit";
-import '../comp/comp-header';
-import '../comp/comp-main';
-import '../comp/comp-logout-button';
-import { logout } from "../util/utils";
+import '../../comp/comp-header';
+import '../../comp/comp-main';
+import '../../comp/comp-logout-button';
+import { logout } from "../../services/auth/auth-service";
 
 export class PageDashboard extends LitElement {
     static styles = css`

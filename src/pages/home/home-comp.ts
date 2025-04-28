@@ -1,11 +1,11 @@
 import { LitElement, html, css } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from 'lit/directives/class-map.js';
-import '../comp/comp-header';
-import '../comp/comp-main';
-import '../comp/comp-login';
-import '../comp/comp-error-box'
-import { login } from "../util/utils";
+import '../../comp/comp-header';
+import '../../comp/comp-main';
+import '../../comp/comp-login';
+import '../../comp/comp-error-box'
+import { login } from "../../services/auth/auth-service";
 
 export class PageHome extends LitElement {
     static styles = css`
