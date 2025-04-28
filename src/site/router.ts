@@ -1,6 +1,6 @@
 import { tuiRouter } from 'tuijs-router';
 import { renderHome } from "../pages/home/home-render";
-import { renderDashboard } from '../pages/dashboard/dashbaord-render';
+import { renderDashboard } from '../pages/dashboard/dashboard-render';
 
 export const routerInstance = tuiRouter();
 routerInstance.setRouteList([
