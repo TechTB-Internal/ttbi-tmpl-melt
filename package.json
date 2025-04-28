@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "lit": "^3.3.0",
-    "tuijs-event": "file:../../TechTB-OpenSource/tuijs-event",
     "tuijs-router": "^0.7.3"
   }
 }
